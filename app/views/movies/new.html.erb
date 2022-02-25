@@ -1,0 +1,17 @@
+
+<div class="container px-5 mt-5">
+  <h2 class='text-center'>Add movie</h2>
+  <div class="row">
+    <div class="col-12 pt-4">
+      <%= simple_form_for [ @movie ] do |f| %>
+        <%= f.input :title, placeholder: 'Add a movie' %>
+        <%= f.input :overview, placeholder: 'Add a overview' %>
+        <%= f.input :poster_url, placeholder: 'Add the poster' %>
+        <%= f.input :rating, placeholder: 'rate the movie' %>
+
+
+        <%= f.submit "Add movie", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

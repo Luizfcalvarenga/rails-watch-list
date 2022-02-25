@@ -1,52 +1,69 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFjl4ryyU53dH03nrCSmhd_GBstljaiFp3ig&usqp=CAU" %>
-    <% end %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+    <div class="container-fluid">
+      <%= link_to "#", class: "navbar-brand" do %>
+        <%= image_tag "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFjl4ryyU53dH03nrCSmhd_GBstljaiFp3ig&usqp=CAU" %>
+      <% end %>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-          <li class="nav-item active">
-            <%= link_to "New list", new_list_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "My lists", root_path, class: "nav-link" %>
-          </li>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto">
 
-      </ul>
+            <li class="nav-item active">
+              <%= link_to "New list", new_list_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "My lists", root_path, class: "nav-link" %>
+            </li>
+
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 
 
 
-    <div class="show-banner" style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.12) 0, rgba(0,0,0,0.55) 74.4%),url('<%= @list.image_url %>')">
-        <h2><%= @list.name %></h2>
-    </div>
-
-
-
-<<% @list.bookmarks.each do |bookmark| %>
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="" class="img-fluid rounded-start" alt="...">
+      <div class="banner" style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.12) 0, rgba(0,0,0,0.55) 74.4%),url('<%= cl_image_path @list.photo.key, crop: :thumb, gravity: :face %>')">
+          <h2 class="text-center"> <%= @list.name %></h2>
       </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title"><%= bookmark.movie.title %></h5>
-          <p class="card-text"><%= bookmark.movie.overview %></p>
-          <p class="card-text"><small class="text-muted"><%= bookmark.movie.rating %> ⭐️</small></p>
+
+
+<div class="container pt-3">
+  <% @list.movies.each do |movie| %>
+    <div class="card mb-3 px-5" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="<%= movie.poster_url %>" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8 pt-3 pb-3">
+          <div class="card-body">
+            <h5 class="card-title"><%= movie.title %></h5>
+            <p class="card-text"><%= movie.overview %></p>
+            <p class="card-text"><%= movie.bookmarks.last.comment %></p>
+            <p class="card-text"><small class="text-muted"><%= movie.rating %> ⭐️</small></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 
 
-<%= link_to "Delete", "/lists/#{@list.id}", method: :delete, data: { confirm: "Are you sure?" } %>
+  <div class="row px-5 mt-3">
+        <div class="col-12">
+          <hr>
+          <div class="form">
+          <h3>Add a new movie</h3>
+          <%= simple_form_for [ @list, @bookmark ] do |f| %>
+            <%= f.input :comment, placeholder: 'Add your comment' %>
+            <%= f.association :movie, input_html: { class: 'select2' } %>
+            <%= f.submit "Add movie", class: "btn btn-primary" %>
+          <% end %>
+          </div>
+      </div>
+    </div>
+
+  <button type="button" class="btn btn-danger"><%= link_to "Delete", "/lists/#{@list.id}", method: :delete, data: { confirm: "Are you sure?" } %></button>
+</div>

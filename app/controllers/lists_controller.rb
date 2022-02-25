@@ -1,5 +1,4 @@
 class ListsController < ApplicationController
-
   def index
     @lists = List.all
   end
@@ -29,9 +28,13 @@ class ListsController < ApplicationController
     redirect_to root_path
   end
 
+
+
   private
 
   def list_params
-    params.require(:list).permit(:name, :image_url)
+    params.require(:list).permit(:name, :photo)
   end
+
+  
 end
