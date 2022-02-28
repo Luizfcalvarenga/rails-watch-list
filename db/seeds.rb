@@ -18,5 +18,5 @@ require "rest-client"
 
 # TODO: Write a seed to insert 10 posts in the database fetched from the Hacker News API.
 response = RestClient.get "http://tmdb.lewagon.com/movie/top_rated"
-movies = JSON.parse(response.body)
+movies = JSON.parse(response)
 Movie.create(title: movies["original_title"], overview: movies["overview"], poster_url: movies["poster_path"], rating: movies["vote_average"])
