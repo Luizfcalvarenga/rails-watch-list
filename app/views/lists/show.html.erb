@@ -30,21 +30,27 @@
           <h2 class="text-center"> <%= @list.name %></h2>
       </div>
 
-
-<div class="container pt-3">
-  <% @list.movies.each do |movie| %>
-    <div class="card-trip mb-3 px-5 col-md-4" style="max-width: 540px;">
-      <img src="<%= movie.poster_url %>" />
-      <div class="card-trip-infos">
-        <div>
-          <h2><%= movie.title %></h2>
-          <p><%= movie.overview %></p>
-          <p><%= movie.bookmarks.last.comment %></p>
+<div class='container'>
+ <div class="row my-2 px-5 pt-3">
+    <% @list.movies.each do |movie| %>
+      <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+      <div class="col-6 col-sm-3 mb-4" data-aos="zoom-in">
+        <div class="bg-white rounded shadow h-100">
+          <%= image_tag movie.poster_url, alt: movie.title, class: 'movie-img rounded-top mx-auto d-block pt-3' %>
+          <div class="p-3 rounded-bottom d-flex flex-column">
+            <strong><%= movie.title %> <span class="text-muted font-weight-normal">• <%= movie.rating %> ⭐️</span></strong>
+            <small class="text-muted"><%= movie.overview %></small>
+            <div class="d-flex align-items-end justify-content-between pt-4">
+              <div>
+                <i class="fas fa-quote-left mr-2"></i><small class="flex-grow-1"> <%= bookmark.comment %></small>
+              </div>
+              <small class="text-right flex-shrink-0"><%= link_to 'delete', bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"}, class: 'text-danger' %></small>
+            </div>
+          </div>
         </div>
-        <h2 class="card-trip-pricing"><%= movie.rating %> ⭐️</h2>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 
 
   <div class="row px-5 mt-3">
@@ -60,5 +66,4 @@
     </div>
   </div>
   <%= link_to "Delete", "/lists/#{@list.id}", method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
-
 </div>
