@@ -1,5 +1,5 @@
  <div class='container'>
-  
+
 
   <h1>Movies</h1>
 
@@ -27,7 +27,7 @@
       <% end %>
     </tbody>
   </table>
-  <button type="button" class="btn btn-success"><%= link_to "Add Movies", new_movie_path %></button>
+  <%= link_to "Add Movies", new_movie_path, class: 'btn btn-success' %>
   <%= link_to 'Back', root_path, class: 'btn btn-success' %>
 
   <br>

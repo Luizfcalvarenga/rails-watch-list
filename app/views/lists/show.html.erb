@@ -33,37 +33,32 @@
 
 <div class="container pt-3">
   <% @list.movies.each do |movie| %>
-    <div class="card mb-3 px-5" style="max-width: 540px;">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img src="<%= movie.poster_url %>" class="img-fluid rounded-start" alt="...">
+    <div class="card-trip mb-3 px-5 col-md-4" style="max-width: 540px;">
+      <img src="<%= movie.poster_url %>" />
+      <div class="card-trip-infos">
+        <div>
+          <h2><%= movie.title %></h2>
+          <p><%= movie.overview %></p>
+          <p><%= movie.bookmarks.last.comment %></p>
         </div>
-        <div class="col-md-8 pt-3 pb-3">
-          <div class="card-body">
-            <h5 class="card-title"><%= movie.title %></h5>
-            <p class="card-text"><%= movie.overview %></p>
-            <p class="card-text"><%= movie.bookmarks.last.comment %></p>
-            <p class="card-text"><small class="text-muted"><%= movie.rating %> ⭐️</small></p>
-          </div>
-        </div>
+        <h2 class="card-trip-pricing"><%= movie.rating %> ⭐️</h2>
       </div>
     </div>
   <% end %>
 
 
   <div class="row px-5 mt-3">
-        <div class="col-12">
-          <hr>
-          <div class="form">
-          <h3>Add a new movie</h3>
-          <%= simple_form_for [ @list, @bookmark ] do |f| %>
-            <%= f.input :comment, placeholder: 'Add your comment' %>
-            <%= f.association :movie, input_html: { class: 'select2' } %>
-            <%= f.submit "Add movie", class: "btn btn-primary" %>
-          <% end %>
-          </div>
+    <div class="col-12">
+      <div class="form">
+        <h3>Add a new movie</h3>
+        <%= simple_form_for [ @list, @bookmark ] do |f| %>
+          <%= f.input :comment, placeholder: 'Add your comment' %>
+          <%= f.association :movie, input_html: { class: 'select2' } %>
+          <%= f.submit "Add movie", class: "btn btn-primary" %>
+        <% end %>
       </div>
     </div>
+  </div>
+  <%= link_to "Delete", "/lists/#{@list.id}", method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
 
-  <button type="button" class="btn btn-danger"><%= link_to "Delete", "/lists/#{@list.id}", method: :delete, data: { confirm: "Are you sure?" } %></button>
 </div>
