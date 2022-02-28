@@ -30,13 +30,13 @@
   <div class="container">
     <h1><strong>Save any kind of movies</strong>!</h1>
     <div class="d-grid gap-2 col-2 mx-auto">
-      <p><%= link_to 'Add a movie list', new_list_path, class: 'btn btn-success' %></p>
+      <p class='text-center'><%= link_to 'Add a movie list', new_list_path, class: 'btn btn-success' %></p>
     </div>
   </div>
 </div>
 
 <div class='container mt-3'>
-  <h2 class='text-center'>My lists</h2>
+  <h2 class='my-5'>My lists</h2>
   <div class="row cards">
       <% @lists.each do |list| %>
         <div class="col-4-sm">
