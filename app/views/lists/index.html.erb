@@ -18,7 +18,7 @@
             <%= link_to "My lists", "#", class: "nav-link" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "See Movies", movies_path, class: "nav-link" %>
+            <%= link_to "Movies", movies_path, class: "nav-link" %>
           </li>
 
       </ul>
@@ -35,8 +35,8 @@
   </div>
 </div>
 
-<div class='container mt-3'>
-  <h2 class='my-5'>My lists</h2>
+<div class='container pb-5'>
+  <h2 class='mb-5 pt-3'>My lists</h2>
   <div class="row cards">
       <% @lists.each do |list| %>
         <div class="col-4-sm">

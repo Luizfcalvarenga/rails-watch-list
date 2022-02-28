@@ -249,6 +249,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.6)
   rails-controller-testing
+  rest-client
   rspec-rails
   sass-rails (>= 6)
   simple_form
