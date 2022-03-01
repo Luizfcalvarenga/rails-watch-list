@@ -1,17 +1,10 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand"  do %>
-      <%= image_tag "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFjl4ryyU53dH03nrCSmhd_GBstljaiFp3ig&usqp=CAU" %>
-    <% end %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-      <div class='d-flex justify-content-center'>
-        <div class="dropdown justify-content-center">
+       <div class="dropdown navbar-brand">
           <a class="btn btn-light dropdown-toggle navbar-brand" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 
+            <img class="avatar" alt="avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFjl4ryyU53dH03nrCSmhd_GBstljaiFp3ig&usqp=CAU", width="40" height="40" class="rounded-circle" />
 
 
           </a>
@@ -21,7 +14,15 @@
             <li class='text-start'><%= link_to "Movies", movies_path, class: "dropdown-item" %></li>
           </ul>
         </div>
-      </div>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+
+
   </div>
 </div>
 
