@@ -13,10 +13,32 @@
 # Movie.create(title: "Lord of Ther Rings: The Two Towers", overview: "Best movies in the world", poster_url: "https://www.oficialhostgeek.com.br/wp-content/uploads/2020/12/zzzz-scaled.jpg", rating: 9.9)
 # Movie.create(title: "Lord of Ther Rings: The Return of the King", overview: "Best movies in the world", poster_url: "https://upload.wikimedia.org/wikipedia/pt/0/0d/EsdlaIII.jpg", rating: 10.0)
 
-require "json"
-require "rest-client"
+require 'httparty'
 
-# TODO: Write a seed to insert 10 posts in the database fetched from the Hacker News API.
-response = RestClient.get "http://tmdb.lewagon.com/movie/top_rated"
-movies = JSON.parse(response)
-Movie.create(title: movies["original_title"], overview: movies["overview"], poster_url: movies["poster_path"], rating: movies["vote_average"])
+poster_image_url = 'https://image.tmdb.org/t/p/w500'
+url = "https://api.themoviedb.org/3/movie/top_rated?api_key=#{ENV['TMDB_KEY']}&language=en-US&page="
+
+puts '=' * 20
+puts 'Creating movies'
+puts '=' * 20
+
+20.times do |i|
+  response = HTTParty.get("#{url}#{i + 1}")
+  movies_data = response.parsed_response['results']
+
+  movies_data.each do |movie|
+    next unless Movie.where(title: movie['title']).empty?
+
+    new_movie = Movie.create!(
+      title: movie['title'],
+      overview: movie['overview'],
+      poster_url: "#{poster_image_url}#{movie['poster_path']}",
+      rating: movie['vote_average']
+    )
+
+    puts "#{new_movie.title} created."
+  end
+end
+
+puts "#{Movie.count} movies created!"
+puts 'Seeds done'

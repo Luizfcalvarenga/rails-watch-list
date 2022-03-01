@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
+    <%= link_to "#", class: "navbar-brand"  do %>
       <%= image_tag "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFjl4ryyU53dH03nrCSmhd_GBstljaiFp3ig&usqp=CAU" %>
     <% end %>
 
@@ -8,21 +8,20 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+      <div class='d-flex justify-content-center'>
+        <div class="dropdown justify-content-center">
+          <a class="btn btn-light dropdown-toggle navbar-brand" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 
-          <li class="nav-item active">
-            <%= link_to "New list", new_list_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "My lists", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "Movies", movies_path, class: "nav-link" %>
-          </li>
 
-      </ul>
-    </div>
+
+          </a>
+          <ul class="dropdown-menu mr-5 justify-content-center" aria-labelledby="dropdownMenuLink">
+            <li class='text-start'><%= link_to "New list", new_list_path, class: "dropdown-item" %></li>
+            <li class='text-start'><%= link_to "My lists", "#", class: "dropdown-item" %></li>
+            <li class='text-start'><%= link_to "Movies", movies_path, class: "dropdown-item" %></li>
+          </ul>
+        </div>
+      </div>
   </div>
 </div>
 
